@@ -7,6 +7,8 @@ style.use('ggplot')
 
 ## SVM源码
 
+# 根据训练数据data_dict 训练模型 预测新点属于哪个label
+
 class Support_Vector_Machine:
     def __init__(self, visualization=True):
         self.visualization = visualization
@@ -150,6 +152,6 @@ predict_us = [[0,10],
               [5,8]]
 
 for p in predict_us:
-    svm.predict(p)
+    print (svm.predict(p))
 
 svm.visualize()
