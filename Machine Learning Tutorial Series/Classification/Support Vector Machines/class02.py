@@ -94,6 +94,40 @@ class Support_Vector_Machine:
         classification = np.sign(np.dot(np.array(features), self.w) + self.b)
         return classification
 
+    def visualize(self):
+        [[self.ax.scatter(x[0],x[1],s=100,color=self.colors[i]) for x in data_dict[i]] for i in data_dict]
+
+        # hyperplane = x.w+b
+        # v = x.w+b
+        # psv = 1
+        # nsv = -1
+        # dec = 0
+        def hyperplane(x,w,b,v):
+            return (-w[0]*x-b+v) / w[1]
+
+        datarange = (self.min_feature_value*0.9,self.max_feature_value*1.1)
+        hyp_x_min = datarange[0]
+        hyp_x_max = datarange[1]
+
+        # (w.x+b) = 1
+        # positive support vector hyperplane
+        psv1 = hyperplane(hyp_x_min, self.w, self.b, 1)
+        psv2 = hyperplane(hyp_x_max, self.w, self.b, 1)
+        self.ax.plot([hyp_x_min,hyp_x_max],[psv1,psv2], 'k')
+
+        # (w.x+b) = -1
+        # negative support vector hyperplane
+        nsv1 = hyperplane(hyp_x_min, self.w, self.b, -1)
+        nsv2 = hyperplane(hyp_x_max, self.w, self.b, -1)
+        self.ax.plot([hyp_x_min,hyp_x_max],[nsv1,nsv2], 'k')
+
+        # (w.x+b) = 0
+        # positive support vector hyperplane
+        db1 = hyperplane(hyp_x_min, self.w, self.b, 0)
+        db2 = hyperplane(hyp_x_max, self.w, self.b, 0)
+        self.ax.plot([hyp_x_min,hyp_x_max],[db1,db2], 'y--')
+
+        plt.show()
 
 data_dict = {-1: np.array([[1, 7],
                            [2, 8],
@@ -102,3 +136,20 @@ data_dict = {-1: np.array([[1, 7],
              1: np.array([[5, 1],
                           [6, -1],
                           [7, 3], ])}
+
+svm = Support_Vector_Machine()
+svm.fit(data=data_dict)
+
+predict_us = [[0,10],
+              [1,3],
+              [3,4],
+              [3,5],
+              [5,5],
+              [5,6],
+              [6,-5],
+              [5,8]]
+
+for p in predict_us:
+    svm.predict(p)
+
+svm.visualize()
