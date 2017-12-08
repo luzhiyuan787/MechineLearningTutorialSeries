@@ -1,6 +1,8 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
 
+# CNN with tensorflow
+
 mnist = input_data.read_data_sets("/tmp/data/", one_hot=True)
 
 n_classes = 10
