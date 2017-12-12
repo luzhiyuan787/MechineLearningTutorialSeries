@@ -1,6 +1,6 @@
 #-*-coding:utf-8-*-
 
-from class02 import create_feature_sets_and_labels
+from .class02 import create_feature_sets_and_labels
 import tensorflow as tf
 import pickle
 import numpy as np

@@ -1,7 +1,4 @@
-import sys
-
-reload(sys)
-sys.setdefaultencoding('utf8')
+#-*-coding:utf-8-*-
 
 import nltk
 from nltk.tokenize import word_tokenize
